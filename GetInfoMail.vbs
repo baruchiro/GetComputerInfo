@@ -22,32 +22,6 @@ Set objFile = objFSO.OpenTextFile(outFile, 8, True)
 objFile.WriteLine "name,value"
 
 
-sWQL = "Select * From Win32_NetworkAdapterConfiguration"    'String Of SQL
-Set oWMISrvEx = GetObject("winmgmts:root/CIMV2")            'SWbemServicesEx
-Set oWMIObjSet = oWMISrvEx.ExecQuery(sWQL)   
-
-For Each oWMIObjEx In oWMIObjSet
-	
-	For Each oWMIProp In oWMIObjEx.Properties_
-		If Not IsNull(oWMIProp.Value) Then
-			
-			If IsArray(oWMIProp.Value) Then
-				
-				For n = LBound(oWMIProp.Value) To UBound(oWMIProp.Value)
-					line = CStr(oWMIProp.Name) & "_Network"
-					line = line & "," & oWMIProp.Value(n)
-					objFile.WriteLine line
-				Next
-			Else
-				line = CStr(oWMIProp.Name) & "_Network"
-				line = line & "," & oWMIProp.Value & ","
-				objFile.WriteLine line
-			End If
-		End If
-	Next
-'End If
-Next
-
 sWQL = "Select * From Win32_LogicalDisk"
 Set oWMISrvEx = GetObject("winmgmts:root/CIMV2")
 Set oWMIObjSet = oWMISrvEx.ExecQuery(sWQL) 
