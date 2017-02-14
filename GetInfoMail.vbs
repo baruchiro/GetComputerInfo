@@ -56,6 +56,94 @@ For Each oWMIObjEx In oWMIObjSet
 					line = oWMIProp.Name & "_Disk"
 				End If
 				line = line & "," & oWMIProp.Value
+				On Error Resume Next
+				objFile.WriteLine line
+			End If
+		End If
+	Next
+'End If
+Next
+
+sWQL = "Select * From Win32_SCSIController"
+Set oWMISrvEx = GetObject("winmgmts:root/CIMV2")
+Set oWMIObjSet = oWMISrvEx.ExecQuery(sWQL)
+
+diskNum = 1
+
+For Each oWMIObjEx In oWMIObjSet
+	
+	For Each oWMIProp In oWMIObjEx.Properties_
+		If Not IsNull(oWMIProp.Value) Then
+			
+			If IsArray(oWMIProp.Value) Then
+				
+				For n = LBound(oWMIProp.Value) To UBound(oWMIProp.Value)
+					
+					If (oWMIProp.Name = "Size") Then
+						line = oWMIProp.Name & CStr(diskNum) & "_SCSI"
+						diskNum = diskNum + 1
+					Else
+						line = oWMIProp.Name & "_SCSI"
+					End If
+					
+					line = line & "," & oWMIProp.Value(n)
+					objFile.WriteLine line
+				Next
+			Else
+				
+				If (oWMIProp.Name = "Size") Then
+					line = oWMIProp.Name & CStr(diskNum) & "_SCSI"
+					diskNum = diskNum + 1
+				Else
+					line = oWMIProp.Name & "_SCSI"
+				End If
+				
+				line = line & "," & oWMIProp.Value
+				On Error Resume Next
+				objFile.WriteLine line
+			End If
+		End If
+	Next
+'End If
+Next
+
+
+sWQL = "Select * From Win32_IDEController"
+Set oWMISrvEx = GetObject("winmgmts:root/CIMV2")
+Set oWMIObjSet = oWMISrvEx.ExecQuery(sWQL)
+
+diskNum = 1
+
+For Each oWMIObjEx In oWMIObjSet
+	
+	For Each oWMIProp In oWMIObjEx.Properties_
+		If Not IsNull(oWMIProp.Value) Then
+			
+			If IsArray(oWMIProp.Value) Then
+				
+				For n = LBound(oWMIProp.Value) To UBound(oWMIProp.Value)
+					
+					If (oWMIProp.Name = "Size") Then
+						line = oWMIProp.Name & CStr(diskNum) & "_IDE"
+						diskNum = diskNum + 1
+					Else
+						line = oWMIProp.Name & "_IDE"
+					End If
+					
+					line = line & "," & oWMIProp.Value(n)
+					objFile.WriteLine line
+				Next
+			Else
+				
+				If (oWMIProp.Name = "Size") Then
+					line = oWMIProp.Name & CStr(diskNum) & "_IDE"
+					diskNum = diskNum + 1
+				Else
+					line = oWMIProp.Name & "_IDE"
+				End If
+				
+				line = line & "," & oWMIProp.Value
+				On Error Resume Next
 				objFile.WriteLine line
 			End If
 		End If
@@ -98,6 +186,7 @@ For Each oWMIObjEx In oWMIObjSet
 				End If
 				
 				line = line & "," & oWMIProp.Value
+				On Error Resume Next
 				objFile.WriteLine line
 			End If
 		End If
@@ -125,6 +214,7 @@ For Each oWMIObjEx In oWMIObjSet
 			Else
 				line = oWMIProp.Name & "_Processor"
 				line = line & "," & oWMIProp.Value
+				On Error Resume Next
 				objFile.WriteLine line
 			End If
 		End If
@@ -151,6 +241,7 @@ For Each oWMIObjEx In oWMIObjSet
 			Else
 				line = oWMIProp.Name & "_Memory"
 				line = line & "," & oWMIProp.Value
+				On Error Resume Next
 				objFile.WriteLine line
 			End If
 		End If
@@ -190,6 +281,7 @@ For Each oWMIObjEx In oWMIObjSet
 					line = oWMIProp.Name & "_Video"
 				End If
 				line = line & "," & oWMIProp.Value
+				On Error Resume Next
 				objFile.WriteLine line
 			End If
 		End If
@@ -218,6 +310,7 @@ For Each oWMIObjEx In oWMIObjSet
 			Else
 				line = oWMIProp.Name & "_Board"
 				line = line & "," & oWMIProp.Value
+				On Error Resume Next
 				objFile.WriteLine line
 			End If
 		End If
@@ -228,7 +321,7 @@ Next
 
 
 
-sWQL = "Select * From Win32_MotherboardDevice"
+sWQL = "Select * From Win32_BaseBoard"
 Set oWMISrvEx = GetObject("winmgmts:root/CIMV2")
 Set oWMIObjSet = oWMISrvEx.ExecQuery(sWQL)
 
@@ -248,6 +341,7 @@ For Each oWMIObjEx In oWMIObjSet
 			Else
 				line = oWMIProp.Name & "_MoBo"
 				line = line & "," & oWMIProp.Value
+				On Error Resume Next
 				objFile.WriteLine line
 				
 			End If
@@ -279,6 +373,7 @@ For Each oWMIObjEx In oWMIObjSet
 			Else                            
 				line = oWMIProp.Name & "_OS"
 				line = line & "," & oWMIProp.Value
+				On Error Resume Next
 				objFile.WriteLine line
 			End If
 		End If
@@ -317,6 +412,7 @@ For Each oWMIObjEx In oWMIObjSet
 				
 				line = line & "," & oWMIProp.Value
 				
+				On Error Resume Next
 				objFile.WriteLine line
 				
 			End If
