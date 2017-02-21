@@ -27,6 +27,7 @@ getData "IDEController", "IDE"
 getData "DiskDrive", "DiskDrive"
 getData "Processor", "Processor"
 getData "PhysicalMemory", "Memory"
+getData "PhysicalMemoryArray", "MemoryArray"
 getData "VideoController", "Video"
 getData "OnBoardDevice", "Board"
 getData "BaseBoard", "MoBo"
@@ -39,12 +40,9 @@ MsgBox("End")
 
 Sub getData(library, sufix)
 	
-	sWQL = "Select * From Win32_"&library 'LogicalDisk"
+	sWQL = "Select * From Win32_" & library
 	Set oWMISrvEx = GetObject("winmgmts:root/CIMV2")
 	Set oWMIObjSet = oWMISrvEx.ExecQuery(sWQL) 
-
-	diskNum = 1
-	counter = 1
 
 
 	For Each oWMIObjEx In oWMIObjSet
@@ -56,30 +54,16 @@ Sub getData(library, sufix)
 				
 					For n = LBound(oWMIProp.Value) To UBound(oWMIProp.Value)
 					
-						If (oWMIProp.Name = "Size") Then
-							line = oWMIProp.Name & CStr(diskNum) & "_"&sufix'Disk"
-							diskNum = diskNum + 1
-						ElseIf oWMIProp.Name = "Caption" Then
-							line = oWMIProp.Name & CStr(counter) & "_"&sufix'Video"
-							counter = counter + 1
-						Else
-							line = oWMIProp.Name & "_"&sufix'Disk"
-						End If
+						line = oWMIProp.Name & "_" & sufix
 						line = line & "," & oWMIProp.Value(n) 
-						objFile.WriteLine line						
+						objFile.WriteLine line					
+						
 					Next
 				Else
 				
-					If (oWMIProp.Name = "Size") Then
-						line = CStr(oWMIProp.Name) & CStr(diskNum) & "_"&sufix'Disk"
-						diskNum = diskNum + 1
-					ElseIf oWMIProp.Name = "Caption" Then
-						line = oWMIProp.Name & CStr(counter) & "_"&sufix'Video"
-						counter = counter + 1
-					Else
-						line = oWMIProp.Name & "_"&sufix'Disk"
-					End If
+					line = oWMIProp.Name & "_" & sufix
 					line = line & "," & oWMIProp.Value
+					
 					On Error Resume Next
 					objFile.WriteLine line
 				End If
