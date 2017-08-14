@@ -1,0 +1,14 @@
+F:\Projects\AddToComputersDB\AddToComputersDB\bin\Debug\AddToComputersDB.exe.config
+F:\Projects\AddToComputersDB\AddToComputersDB\bin\Debug\AddToComputersDB.exe.manifest
+F:\Projects\AddToComputersDB\AddToComputersDB\bin\Debug\AddToComputersDB.application
+F:\Projects\AddToComputersDB\AddToComputersDB\bin\Debug\AddToComputersDB.exe
+F:\Projects\AddToComputersDB\AddToComputersDB\bin\Debug\AddToComputersDB.pdb
+F:\Projects\AddToComputersDB\AddToComputersDB\bin\Debug\EntityFramework.dll
+F:\Projects\AddToComputersDB\AddToComputersDB\bin\Debug\EntityFramework.SqlServer.dll
+F:\Projects\AddToComputersDB\AddToComputersDB\bin\Debug\EntityFramework.xml
+F:\Projects\AddToComputersDB\AddToComputersDB\bin\Debug\EntityFramework.SqlServer.xml
+F:\Projects\AddToComputersDB\AddToComputersDB\obj\Debug\AddToComputersDB.exe.manifest
+F:\Projects\AddToComputersDB\AddToComputersDB\obj\Debug\AddToComputersDB.application
+F:\Projects\AddToComputersDB\AddToComputersDB\obj\Debug\AddToComputersDB.exe
+F:\Projects\AddToComputersDB\AddToComputersDB\obj\Debug\AddToComputersDB.pdb
+F:\Projects\AddToComputersDB\AddToComputersDB\obj\Debug\AddToComputersDB.csprojResolveAssemblyReference.cache

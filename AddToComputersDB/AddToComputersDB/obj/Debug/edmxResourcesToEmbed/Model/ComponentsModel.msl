@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ComponentsDBModelStoreContainer" CdmEntityContainer="ComponentsDBEntities">
+    <EntitySetMapping Name="Computers">
+      <EntityTypeMapping TypeName="ComponentsDBModel.Computers">
+        <MappingFragment StoreEntitySet="Computers">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="comments" ColumnName="comments" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="osID" ColumnName="osID" />
+          <ScalarProperty Name="osVersion" ColumnName="osVersion" />
+          <ScalarProperty Name="model" ColumnName="model" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Memories">
+      <EntityTypeMapping TypeName="ComponentsDBModel.Memories">
+        <MappingFragment StoreEntitySet="Memories">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="capacity" ColumnName="capacity" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="manufcator" ColumnName="manufcator" />
+          <ScalarProperty Name="computerType" ColumnName="computerType" />
+          <ScalarProperty Name="moboID" ColumnName="moboID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MoBos">
+      <EntityTypeMapping TypeName="ComponentsDBModel.MoBos">
+        <MappingFragment StoreEntitySet="MoBos">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="manufcator" ColumnName="manufcator" />
+          <ScalarProperty Name="model" ColumnName="model" />
+          <ScalarProperty Name="slots" ColumnName="slots" />
+          <ScalarProperty Name="Channels" ColumnName="Channels" />
+          <ScalarProperty Name="memoryType" ColumnName="memoryType" />
+          <ScalarProperty Name="memoryMaxSize" ColumnName="memoryMaxSize" />
+          <ScalarProperty Name="computerType" ColumnName="computerType" />
+          <ScalarProperty Name="diskID" ColumnName="diskID" />
+          <ScalarProperty Name="architacture" ColumnName="architacture" />
+          <ScalarProperty Name="proessorID" ColumnName="proessorID" />
+          <ScalarProperty Name="computerID" ColumnName="computerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OSs">
+      <EntityTypeMapping TypeName="ComponentsDBModel.OSs">
+        <MappingFragment StoreEntitySet="OSs">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="architacture" ColumnName="architacture" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Processors">
+      <EntityTypeMapping TypeName="ComponentsDBModel.Processors">
+        <MappingFragment StoreEntitySet="Processors">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="generation" ColumnName="generation" />
+          <ScalarProperty Name="family" ColumnName="family" />
+          <ScalarProperty Name="speed" ColumnName="speed" />
+          <ScalarProperty Name="rank" ColumnName="rank" />
+          <ScalarProperty Name="architacture" ColumnName="architacture" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

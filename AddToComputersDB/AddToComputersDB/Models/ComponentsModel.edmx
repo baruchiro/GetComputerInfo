@@ -1,0 +1,570 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ComponentsDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ColumnName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="zero" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="one" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Components">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Computers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="comments" Type="ntext" />
+          <Property Name="status" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="model" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Disks">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
+          <Property Name="capacity" Type="int" />
+          <Property Name="type" Type="bit" />
+          <Property Name="comments" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="status" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="computerType" Type="bit" />
+          <Property Name="osID" Type="int" />
+          <Property Name="osVersion" Type="nvarchar" MaxLength="50" />
+          <Property Name="freeToUse" Type="bit" />
+          <Property Name="moboID" Type="int" />
+        </EntityType>
+        <EntityType Name="Memories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="capacity" Type="int" Nullable="false" />
+          <Property Name="type" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="manufcator" Type="nvarchar" MaxLength="255" />
+          <Property Name="computerType" Type="bit" Nullable="false" />
+          <Property Name="moboID" Type="int" />
+          <Property Name="freeToUse" Type="bit" />
+        </EntityType>
+        <EntityType Name="MoBos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="manufcator" Type="nvarchar" MaxLength="255" />
+          <Property Name="model" Type="nvarchar" MaxLength="255" />
+          <Property Name="slots" Type="int" />
+          <Property Name="Channels" Type="int" />
+          <Property Name="memoryType" Type="nvarchar" MaxLength="255" />
+          <Property Name="memoryMaxSize" Type="int" />
+          <Property Name="computerType" Type="bit" />
+          <Property Name="architacture" Type="bit" />
+          <Property Name="proessorID" Type="int" />
+          <Property Name="computerID" Type="int" />
+          <Property Name="SataConnectors" Type="int" />
+        </EntityType>
+        <EntityType Name="MobosSockets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MoboID" Type="int" Nullable="false" />
+          <Property Name="SocketID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OSs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="architacture" Type="bit" />
+        </EntityType>
+        <EntityType Name="Processors">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="generation" Type="int" />
+          <Property Name="family" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="speed" Type="int" />
+          <Property Name="rank" Type="int" />
+          <Property Name="architacture" Type="bit" />
+          <Property Name="freeToUse" Type="bit" />
+        </EntityType>
+        <EntityType Name="ProcessorSocket">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProcessorID" Type="int" Nullable="false" />
+          <Property Name="SocketID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sockets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="ComponentsDBModelStoreContainer">
+          <EntitySet Name="Bits" EntityType="Self.Bits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Components" EntityType="Self.Components" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Computers" EntityType="Self.Computers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Disks" EntityType="Self.Disks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Memories" EntityType="Self.Memories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MoBos" EntityType="Self.MoBos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MobosSockets" EntityType="Self.MobosSockets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OSs" EntityType="Self.OSs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Processors" EntityType="Self.Processors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProcessorSocket" EntityType="Self.ProcessorSocket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sockets" EntityType="Self.Sockets" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ComponentsDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ComponentsDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MobosSockets" EntityType="ComponentsDBModel.MobosSockets" />
+          <EntitySet Name="Processors" EntityType="ComponentsDBModel.Processors" />
+          <EntitySet Name="ProcessorSocket" EntityType="ComponentsDBModel.ProcessorSocket" />
+          <EntitySet Name="Sockets" EntityType="ComponentsDBModel.Sockets" />
+          <AssociationSet Name="SocketsMobosSockets" Association="ComponentsDBModel.SocketsMobosSockets">
+            <End Role="Sockets" EntitySet="Sockets" />
+            <End Role="MobosSockets" EntitySet="MobosSockets" />
+          </AssociationSet>
+          <AssociationSet Name="SocketsProcessorSocket" Association="ComponentsDBModel.SocketsProcessorSocket">
+            <End Role="Sockets" EntitySet="Sockets" />
+            <End Role="ProcessorSocket" EntitySet="ProcessorSocket" />
+          </AssociationSet>
+          <AssociationSet Name="ProcessorsProcessorSocket" Association="ComponentsDBModel.ProcessorsProcessorSocket">
+            <End Role="Processors" EntitySet="Processors" />
+            <End Role="ProcessorSocket" EntitySet="ProcessorSocket" />
+          </AssociationSet>
+          <EntitySet Name="MoBos" EntityType="ComponentsDBModel.MoBos" />
+          <AssociationSet Name="MoBosMobosSockets" Association="ComponentsDBModel.MoBosMobosSockets">
+            <End Role="MoBos" EntitySet="MoBos" />
+            <End Role="MobosSockets" EntitySet="MobosSockets" />
+          </AssociationSet>
+          <EntitySet Name="Bits" EntityType="ComponentsDBModel.Bits" />
+          <EntitySet Name="Computers" EntityType="ComponentsDBModel.Computers" />
+          <EntitySet Name="Disks" EntityType="ComponentsDBModel.Disks" />
+          <EntitySet Name="Memories" EntityType="ComponentsDBModel.Memories" />
+          <EntitySet Name="OSs" EntityType="ComponentsDBModel.OSs" />
+          <EntitySet Name="Components" EntityType="ComponentsDBModel.Components" />
+          <AssociationSet Name="DisksMoBos" Association="ComponentsDBModel.DisksMoBos">
+            <End Role="Disks" EntitySet="Disks" />
+            <End Role="MoBos" EntitySet="MoBos" />
+          </AssociationSet>
+          <AssociationSet Name="MoBosMemories" Association="ComponentsDBModel.MoBosMemories">
+            <End Role="MoBos" EntitySet="MoBos" />
+            <End Role="Memories" EntitySet="Memories" />
+          </AssociationSet>
+          <AssociationSet Name="ProcessorsMoBos" Association="ComponentsDBModel.ProcessorsMoBos">
+            <End Role="Processors" EntitySet="Processors" />
+            <End Role="MoBos" EntitySet="MoBos" />
+          </AssociationSet>
+          <AssociationSet Name="MoBosComputers" Association="ComponentsDBModel.MoBosComputers">
+            <End Role="MoBos" EntitySet="MoBos" />
+            <End Role="Computers" EntitySet="Computers" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="MobosSockets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MoboID" Type="Int32" Nullable="false" />
+          <Property Name="SocketID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sockets" Relationship="ComponentsDBModel.SocketsMobosSockets" FromRole="MobosSockets" ToRole="Sockets" />
+          <NavigationProperty Name="MoBos" Relationship="ComponentsDBModel.MoBosMobosSockets" FromRole="MobosSockets" ToRole="MoBos" />
+        </EntityType>
+        <EntityType Name="Processors">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="generation" Type="Int32" />
+          <Property Name="family" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="speed" Type="Int32" />
+          <Property Name="rank" Type="Int32" />
+          <Property Name="architacture" Type="Boolean" />
+          <NavigationProperty Name="ProcessorSocket" Relationship="ComponentsDBModel.ProcessorsProcessorSocket" FromRole="Processors" ToRole="ProcessorSocket" />
+          <Property Name="freeToUse" Type="Boolean" />
+          <NavigationProperty Name="MoBos" Relationship="ComponentsDBModel.ProcessorsMoBos" FromRole="Processors" ToRole="MoBos" />
+        </EntityType>
+        <EntityType Name="ProcessorSocket">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProcessorID" Type="Int32" Nullable="false" />
+          <Property Name="SocketID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sockets" Relationship="ComponentsDBModel.SocketsProcessorSocket" FromRole="ProcessorSocket" ToRole="Sockets" />
+          <NavigationProperty Name="Processors" Relationship="ComponentsDBModel.ProcessorsProcessorSocket" FromRole="ProcessorSocket" ToRole="Processors" />
+        </EntityType>
+        <EntityType Name="Sockets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MobosSockets" Relationship="ComponentsDBModel.SocketsMobosSockets" FromRole="Sockets" ToRole="MobosSockets" />
+          <NavigationProperty Name="ProcessorSocket" Relationship="ComponentsDBModel.SocketsProcessorSocket" FromRole="Sockets" ToRole="ProcessorSocket" />
+        </EntityType>
+        <Association Name="SocketsMobosSockets">
+          <End Type="ComponentsDBModel.Sockets" Role="Sockets" Multiplicity="1" />
+          <End Type="ComponentsDBModel.MobosSockets" Role="MobosSockets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sockets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MobosSockets">
+              <PropertyRef Name="SocketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SocketsProcessorSocket">
+          <End Type="ComponentsDBModel.Sockets" Role="Sockets" Multiplicity="1" />
+          <End Type="ComponentsDBModel.ProcessorSocket" Role="ProcessorSocket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sockets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProcessorSocket">
+              <PropertyRef Name="SocketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProcessorsProcessorSocket">
+          <End Type="ComponentsDBModel.Processors" Role="Processors" Multiplicity="1" />
+          <End Type="ComponentsDBModel.ProcessorSocket" Role="ProcessorSocket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Processors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProcessorSocket">
+              <PropertyRef Name="ProcessorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MoBos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="manufcator" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="model" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="slots" Type="Int32" />
+          <Property Name="Channels" Type="Int32" />
+          <Property Name="memoryType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="memoryMaxSize" Type="Int32" />
+          <Property Name="computerType" Type="Boolean" />
+          <Property Name="proessorID" Type="Int32" Nullable="true" />
+          <Property Name="computerID" Type="Int32" />
+          <Property Name="SataConnectors" Type="Int32" />
+          <NavigationProperty Name="MobosSockets" Relationship="ComponentsDBModel.MoBosMobosSockets" FromRole="MoBos" ToRole="MobosSockets" />
+          <Property Name="architacture" Type="Boolean" />
+          <NavigationProperty Name="Disks" Relationship="ComponentsDBModel.DisksMoBos" FromRole="MoBos" ToRole="Disks" />
+          <NavigationProperty Name="Memories" Relationship="ComponentsDBModel.MoBosMemories" FromRole="MoBos" ToRole="Memories" />
+          <NavigationProperty Name="Processors" Relationship="ComponentsDBModel.ProcessorsMoBos" FromRole="MoBos" ToRole="Processors" />
+          <NavigationProperty Name="Computers" Relationship="ComponentsDBModel.MoBosComputers" FromRole="MoBos" ToRole="Computers" />
+        </EntityType>
+        <Association Name="MoBosMobosSockets">
+          <End Type="ComponentsDBModel.MoBos" Role="MoBos" Multiplicity="1" />
+          <End Type="ComponentsDBModel.MobosSockets" Role="MobosSockets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MoBos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MobosSockets">
+              <PropertyRef Name="MoboID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Bits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ColumnName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="zero" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="one" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Computers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="model" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MoBos" Relationship="ComponentsDBModel.MoBosComputers" FromRole="Computers" ToRole="MoBos" />
+        </EntityType>
+        <EntityType Name="Disks">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="capacity" Type="Int32" />
+          <Property Name="type" Type="Boolean" />
+          <Property Name="comments" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="computerType" Type="Boolean" />
+          <Property Name="osID" Type="Int32" />
+          <Property Name="osVersion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="freeToUse" Type="Boolean" />
+          <Property Name="moboID" Type="Int32" />
+          <NavigationProperty Name="MoBos" Relationship="ComponentsDBModel.DisksMoBos" FromRole="Disks" ToRole="MoBos" />
+        </EntityType>
+        <EntityType Name="Memories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="capacity" Type="Int32" Nullable="false" />
+          <Property Name="type" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="manufcator" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="computerType" Type="Boolean" Nullable="false" />
+          <Property Name="moboID" Type="Int32" />
+          <Property Name="freeToUse" Type="Boolean" />
+          <NavigationProperty Name="MoBos" Relationship="ComponentsDBModel.MoBosMemories" FromRole="Memories" ToRole="MoBos" />
+        </EntityType>
+        <EntityType Name="OSs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="architacture" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Components">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="DisksMoBos">
+          <End Type="ComponentsDBModel.Disks" Role="Disks" Multiplicity="*" />
+          <End Type="ComponentsDBModel.MoBos" Role="MoBos" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="MoBos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Disks">
+              <PropertyRef Name="moboID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MoBosMemories">
+          <End Type="ComponentsDBModel.MoBos" Role="MoBos" Multiplicity="0..1" />
+          <End Type="ComponentsDBModel.Memories" Role="Memories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MoBos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Memories">
+              <PropertyRef Name="moboID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProcessorsMoBos">
+          <End Type="ComponentsDBModel.Processors" Role="Processors" Multiplicity="0..1" />
+          <End Type="ComponentsDBModel.MoBos" Role="MoBos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Processors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MoBos">
+              <PropertyRef Name="proessorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MoBosComputers">
+          <End Type="ComponentsDBModel.MoBos" Role="MoBos" Multiplicity="*" />
+          <End Type="ComponentsDBModel.Computers" Role="Computers" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Computers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MoBos">
+              <PropertyRef Name="computerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ComponentsDBModelStoreContainer" CdmEntityContainer="ComponentsDBEntities">
+          <EntitySetMapping Name="MobosSockets">
+            <EntityTypeMapping TypeName="ComponentsDBModel.MobosSockets">
+              <MappingFragment StoreEntitySet="MobosSockets">
+                <ScalarProperty Name="SocketID" ColumnName="SocketID" />
+                <ScalarProperty Name="MoboID" ColumnName="MoboID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Processors">
+            <EntityTypeMapping TypeName="ComponentsDBModel.Processors">
+              <MappingFragment StoreEntitySet="Processors">
+                <ScalarProperty Name="freeToUse" ColumnName="freeToUse" />
+                <ScalarProperty Name="architacture" ColumnName="architacture" />
+                <ScalarProperty Name="rank" ColumnName="rank" />
+                <ScalarProperty Name="speed" ColumnName="speed" />
+                <ScalarProperty Name="family" ColumnName="family" />
+                <ScalarProperty Name="generation" ColumnName="generation" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProcessorSocket">
+            <EntityTypeMapping TypeName="ComponentsDBModel.ProcessorSocket">
+              <MappingFragment StoreEntitySet="ProcessorSocket">
+                <ScalarProperty Name="SocketID" ColumnName="SocketID" />
+                <ScalarProperty Name="ProcessorID" ColumnName="ProcessorID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sockets">
+            <EntityTypeMapping TypeName="ComponentsDBModel.Sockets">
+              <MappingFragment StoreEntitySet="Sockets">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MoBos">
+            <EntityTypeMapping TypeName="ComponentsDBModel.MoBos">
+              <MappingFragment StoreEntitySet="MoBos">
+                <ScalarProperty Name="architacture" ColumnName="architacture" />
+                <ScalarProperty Name="SataConnectors" ColumnName="SataConnectors" />
+                <ScalarProperty Name="computerID" ColumnName="computerID" />
+                <ScalarProperty Name="proessorID" ColumnName="proessorID" />
+                <ScalarProperty Name="computerType" ColumnName="computerType" />
+                <ScalarProperty Name="memoryMaxSize" ColumnName="memoryMaxSize" />
+                <ScalarProperty Name="memoryType" ColumnName="memoryType" />
+                <ScalarProperty Name="Channels" ColumnName="Channels" />
+                <ScalarProperty Name="slots" ColumnName="slots" />
+                <ScalarProperty Name="model" ColumnName="model" />
+                <ScalarProperty Name="manufcator" ColumnName="manufcator" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bits">
+            <EntityTypeMapping TypeName="ComponentsDBModel.Bits">
+              <MappingFragment StoreEntitySet="Bits">
+                <ScalarProperty Name="one" ColumnName="one" />
+                <ScalarProperty Name="zero" ColumnName="zero" />
+                <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Computers">
+            <EntityTypeMapping TypeName="ComponentsDBModel.Computers">
+              <MappingFragment StoreEntitySet="Computers">
+                <ScalarProperty Name="model" ColumnName="model" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="comments" ColumnName="comments" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Disks">
+            <EntityTypeMapping TypeName="ComponentsDBModel.Disks">
+              <MappingFragment StoreEntitySet="Disks">
+                <ScalarProperty Name="moboID" ColumnName="moboID" />
+                <ScalarProperty Name="freeToUse" ColumnName="freeToUse" />
+                <ScalarProperty Name="osVersion" ColumnName="osVersion" />
+                <ScalarProperty Name="osID" ColumnName="osID" />
+                <ScalarProperty Name="computerType" ColumnName="computerType" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="comments" ColumnName="comments" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="capacity" ColumnName="capacity" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Memories">
+            <EntityTypeMapping TypeName="ComponentsDBModel.Memories">
+              <MappingFragment StoreEntitySet="Memories">
+                <ScalarProperty Name="freeToUse" ColumnName="freeToUse" />
+                <ScalarProperty Name="moboID" ColumnName="moboID" />
+                <ScalarProperty Name="computerType" ColumnName="computerType" />
+                <ScalarProperty Name="manufcator" ColumnName="manufcator" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="capacity" ColumnName="capacity" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OSs">
+            <EntityTypeMapping TypeName="ComponentsDBModel.OSs">
+              <MappingFragment StoreEntitySet="OSs">
+                <ScalarProperty Name="architacture" ColumnName="architacture" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Components">
+            <EntityTypeMapping TypeName="ComponentsDBModel.Components">
+              <MappingFragment StoreEntitySet="Components">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
