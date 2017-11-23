@@ -148,7 +148,9 @@ namespace AddToComputersDB.Models
                     Console.WriteLine("Enter MoBo ID:");
                     foreach (MoBos mobo in Program.db.MoBos)
                         Console.WriteLine(mobo.id + ". For " + mobo.ToString());
-                    moboID = Convert.ToInt32(Console.ReadLine());
+
+                    string result = Console.ReadLine();
+                    moboID = result == null || result.Length == 0 ? 0 : Convert.ToInt32(result);
                 }
 
                 Console.WriteLine("Free to use: " + freeToUse.Value + "\nDo you want to change it? y/n: ");
@@ -646,7 +648,7 @@ namespace AddToComputersDB.Models
         {
             Console.WriteLine("DELETE:\t" + ToString());
             Console.Write(Program.RTL("האם אתה בטוח?? לא ניתן לשנות את זה לאחר מכן! " + "y/n: "));
-            if (Console.ReadLine().ToLower()[0] != 'y')
+            if (Console.ReadLine().ToLower()[0] == 'y')
             {
                 bool result = true;
 
@@ -781,7 +783,8 @@ namespace AddToComputersDB.Models
             if (Console.ReadLine().ToLower()[0] == 'y')
             {
                 bool result = true;
-                foreach (MoBos m in MoBos)
+                List<MoBos> mobo = MoBos.ToList();
+                foreach (MoBos m in mobo)
                     result = result && m.KillMeAndMyChildrens();
                 Program.db.Entry(this).State = EntityState.Deleted;
                 return result;
@@ -1445,7 +1448,7 @@ namespace AddToComputersDB.Models
         {
             Console.WriteLine("DELETE:\t" + ToString());
             Console.Write(Program.RTL("האם אתה בטוח?? לא ניתן לשנות את זה לאחר מכן! " + "y/n: "));
-            if (Console.ReadLine().ToLower()[0] != 'y')
+            if (Console.ReadLine().ToLower()[0] == 'y')
             {
                 Program.db.Entry(this).State = EntityState.Deleted;
                 return true;
