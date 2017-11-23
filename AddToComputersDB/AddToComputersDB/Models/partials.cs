@@ -220,22 +220,28 @@ namespace AddToComputersDB.Models
             Console.Write("Enter Architacture:\n0. For 32 bit\n1. For 64 bit\n>");
             architacture = Console.ReadLine()[0] == '1';
 
-            int socketID = 1;
-            while (socketID != 0)
+            int socketID;
+            do
             {
                 Console.WriteLine("Enter MoBo socket:");
                 foreach (Sockets socket in Program.db.Sockets)
-                    Console.WriteLine(socket.Id + ". For " + socket.ToString());
-                Console.Write("For end enter 0: ");
+                    Console.WriteLine(socket.Id + ". For " + socket);
+                Console.Write("For Add enter 0\nFor end enter 999: ");
 
                 socketID = Convert.ToInt32(Console.ReadLine());
-                if (socketID != 0)
-                    MobosSockets.Add(new MobosSockets
+                if (socketID == 0)
+                    MobosSockets.Add(new MobosSockets()
+                    {
+                        MoboID = id,
+                        SocketID = Sockets.Create().Id
+                    });
+                else if (socketID != 999)
+                    MobosSockets.Add(new MobosSockets()
                     {
                         MoboID = id,
                         SocketID = socketID
                     });
-            }
+            } while (socketID != 999);
 
 
         }
