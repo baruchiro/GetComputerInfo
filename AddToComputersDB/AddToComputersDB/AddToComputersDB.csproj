@@ -90,6 +90,7 @@
     <Compile Include="Models\Computers.cs">
       <DependentUpon>ComponentsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataTypes.cs" />
     <Compile Include="Models\Disks.cs">
       <DependentUpon>ComponentsModel.tt</DependentUpon>
     </Compile>

@@ -87,7 +87,9 @@ namespace AddToComputersDB
                     Console.WriteLine("Enter ORDER BY condition:\nFields:");
                     foreach (string column in db.GetColumnsForTable(table))
                         Console.WriteLine(column);
-                    string orderby = " ORDER BY " + Console.ReadLine();
+                    string orderby = Console.ReadLine();
+                    if(!orderby.Equals(""))
+                    orderby = " ORDER BY " + orderby;
 
                     string start = "SELECT * FROM dbo.";
 

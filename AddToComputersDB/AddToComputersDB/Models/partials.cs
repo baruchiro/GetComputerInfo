@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Reflection;
@@ -31,8 +32,9 @@ namespace AddToComputersDB.Models
             Console.Write("): ");
             type = Console.ReadLine();
 
+            /*DataTypes.getInput(typeof(string), "Enter manufcator: ", manufcator);
             Console.Write("Enter manufcator: ");
-            manufcator = Console.ReadLine();
+            manufcator = Console.ReadLine();*/
 
             Console.Write("Enter Computer type:\n0. For Laptop\n1. For PC\n>");
             computerType = Console.ReadLine()[0] == '1';
@@ -772,7 +774,7 @@ namespace AddToComputersDB.Models
             Console.Write(Program.RTL("האם אתה בטוח?? לא ניתן לשנות את זה לאחר מכן! " + "y/n: "));
             if (Console.ReadLine().ToLower()[0] == 'y')
             {
-                bool result = true;               
+                bool result = true;
                 foreach (MoBos m in MoBos)
                     result = result && m.KillMeAndMyChildrens();
                 Program.db.Entry(this).State = EntityState.Deleted;
@@ -1055,6 +1057,11 @@ namespace AddToComputersDB.Models
             generation = Convert.ToInt32(Console.ReadLine());
 
             Console.Write("Enter Family: ");
+            foreach (string p in Program.db.Processors.Select(p => p.family).Distinct())
+            {
+                Console.Write(", " + Program.RTL(p));
+            }
+            Console.Write("): ");
             family = Console.ReadLine();
 
             Console.Write("Enter Max speed (in MHz): ");
@@ -1066,22 +1073,28 @@ namespace AddToComputersDB.Models
             Console.Write("Enter Architacture:\n0. For 32 bit\n1. For 64 bit\n>");
             architacture = Console.ReadLine()[0] == '1';
 
-            int socketID = 1;
-            while (socketID != 0)
+            int socketID;
+            do
             {
                 Console.WriteLine("Enter processor socket:");
                 foreach (Sockets socket in Program.db.Sockets)
                     Console.WriteLine(socket.Id + ". For " + socket.ToString());
-                Console.Write("For end enter 0: ");
+                Console.Write("For Add enter 0\nFor end enter 999: ");
 
                 socketID = Convert.ToInt32(Console.ReadLine());
-                if (socketID != 0)
+                if (socketID == 0)
+                    ProcessorSocket.Add(new ProcessorSocket()
+                    {
+                        ProcessorID = id,
+                        SocketID = Sockets.Create().Id
+                    });
+                else if (socketID != 999)
                     ProcessorSocket.Add(new ProcessorSocket()
                     {
                         ProcessorID = id,
                         SocketID = socketID
                     });
-            }
+            } while (socketID != 999);
 
             Console.Write("Free to use?:\n0. For False\n1. For True\n>");
             freeToUse = Console.ReadLine()[0] == '1';
@@ -1179,7 +1192,7 @@ namespace AddToComputersDB.Models
             return
                 name.Contains(word) ||
                 family.Contains(word) ||
-                ProcessorSocket.Where(p => p.Sockets.Name.Contains(word)).Count() > 0;
+                ProcessorSocket.Where(p => p.Sockets.Name.Contains(word)).Any();
         }
 
         public override void SetFreeToUse(bool freeToUse)
@@ -1265,6 +1278,23 @@ namespace AddToComputersDB.Models
         public override string ToString()
         {
             return Program.RTL(Name);
+        }
+
+        public static Sockets Create()
+        {
+            Console.Write("Enter Socket Name: ");
+            Sockets socket = new Sockets() { Name = Console.ReadLine() };
+            Program.db.Sockets.Add(socket);
+            if (Program.db.SaveChanges() > 0)
+            {
+                Console.WriteLine("Socket " + socket.Name + " Inserted");
+                return socket;
+            }
+            else
+            {
+                Console.WriteLine("ERROR");
+                throw new DBConcurrencyException();
+            }
         }
     }
 
