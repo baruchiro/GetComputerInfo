@@ -93,9 +93,15 @@ namespace AddToComputersDB
 
                     string start = "SELECT * FROM dbo.";
 
-                    foreach (IMyEntity entity in db.Set(table).SqlQuery(start + table.Name + where + orderby))
+                    try
                     {
-                        Console.WriteLine(entity.ToString());
+                        foreach (IMyEntity entity in db.Set(table).SqlQuery(start + table.Name + where + orderby))
+                        {
+                            Console.WriteLine(entity.ToString());
+                        }
+                    }catch(System.Data.SqlClient.SqlException ex)
+                    {
+                        Console.WriteLine("ERROR: " + ex.Message);
                     }
                 }
             } while (selected != 0);
