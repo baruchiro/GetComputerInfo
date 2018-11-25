@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="AddToComputersDB.Models.Memories">
+    <Position X="0.5" Y="4" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQAABAAABAIAIAEAAIAABABAAABAUAAAAAAiAAgAgA=</HashCode>
+      <FileName>Models\Memories.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AddToComputersDB.Models.MotherBoard">
+    <Position X="8.75" Y="4" Width="3.75" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQAAARgABAAAAIUAAYAABABACIAAFBMACEAiJAoEgA=</HashCode>
+      <FileName>Models\MoBos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AddToComputersDB.Models.Computers">
+    <Position X="13" Y="4" Width="3" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQgAAAAABAAAAAEAAAAAAABAAAEAEBUIAAAgAAoAgA=</HashCode>
+      <FileName>Models\Computers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AddToComputersDB.Models.Disks">
+    <Position X="16.5" Y="4" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AARgAAAAABAYAIAEAAIAAAgBAAAFAEAQAAAAiAAgAgA=</HashCode>
+      <FileName>Models\Disks.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AddToComputersDB.Models.Processors">
+    <Position X="4" Y="4" Width="4" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAARAIAIAEAAAAAAABASAEAUAQAAAAkAAgAgA=</HashCode>
+      <FileName>Models\Processors.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
