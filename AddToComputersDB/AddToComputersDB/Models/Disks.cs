@@ -26,6 +26,6 @@ namespace AddToComputersDB.Models
         public Nullable<bool> freeToUse { get; set; }
         public Nullable<int> moboID { get; set; }
     
-        public virtual MoBos MoBos { get; set; }
+        public virtual MotherBoard MoBos { get; set; }
     }
 }

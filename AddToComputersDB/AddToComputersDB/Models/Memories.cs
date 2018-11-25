@@ -19,9 +19,16 @@ namespace AddToComputersDB.Models
         public string type { get; set; }
         public string manufcator { get; set; }
         public bool computerType { get; set; }
-        public Nullable<int> moboID { get; set; }
         public Nullable<bool> freeToUse { get; set; }
     
-        public virtual MoBos MoBos { get; set; }
+        public virtual MotherBoard motherBoard { get; set; }
+
+        public int speed
+        {
+            get => default(int);
+            set
+            {
+            }
+        }
     }
 }

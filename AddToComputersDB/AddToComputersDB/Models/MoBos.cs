@@ -12,10 +12,10 @@ namespace AddToComputersDB.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class MoBos
+    public partial class MotherBoard
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public MoBos()
+        public MotherBoard()
         {
             this.MobosSockets = new HashSet<MobosSockets>();
             this.Disks = new HashSet<Disks>();

@@ -18,7 +18,7 @@ namespace AddToComputersDB.Models
         public Processors()
         {
             this.ProcessorSocket = new HashSet<ProcessorSocket>();
-            this.MoBos = new HashSet<MoBos>();
+            this.MoBos = new HashSet<MotherBoard>();
         }
     
         public int id { get; set; }
@@ -33,6 +33,6 @@ namespace AddToComputersDB.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProcessorSocket> ProcessorSocket { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MoBos> MoBos { get; set; }
+        public virtual ICollection<MotherBoard> MoBos { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects.DataClasses;
 using System.Data.OleDb;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -28,12 +29,13 @@ namespace AddToComputersDB
             do
             {
                 Console.Write("Choose Option:\n" +
-                    "a. For new record\n" +
-                    "b. For recommends\n" +
-                    "c. For work with specific component\n" +
-                    "d. For search word\n" +
-                    "e. For custom query\n" +
-                    "0. For Exit\n>");
+                              "a. For new record\n" +
+                              "b. For recommends\n" +
+                              "c. For work with specific component\n" +
+                              "d. For search word\n" +
+                              "e. For custom query\n" +
+                              "f. For folders compare\n" +
+                              "0. For Exit\n>");
                 string answer = Console.ReadLine(); //for exception outofrange in empty imput
                 choose = answer.Length == 0 ? 'x' : answer[0];
 
@@ -53,6 +55,23 @@ namespace AddToComputersDB
                         break;
                     case 'e':
                         CustomQuery();
+                        break;
+                    case 'f':
+                        DirCompare compare = new DirCompare();
+                        if (compare.RequestFolders())
+                        {
+                            Console.WriteLine(
+                                $"This file exist in source folder: {compare.GetSource()}, " +
+                                $"but no in dest folder: {compare.GetDest()}");
+                            foreach (string difference in compare.GetDifferences())
+                            {
+                                Console.WriteLine(RTL(difference));
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Not have two folders");
+                        }
                         break;
                 }
             } while (choose != '0');
@@ -82,7 +101,9 @@ namespace AddToComputersDB
                     Console.WriteLine("Enter WHERE condition:\nFields:");
                     foreach (string column in db.GetColumnsForTable(table))
                         Console.WriteLine(column);
-                    string where = " WHERE " + Console.ReadLine();
+                    string where = Console.ReadLine();
+                    if (where != null && !where.Equals(""))
+                        where = " WHERE " + where;
 
                     Console.WriteLine("Enter ORDER BY condition:\nFields:");
                     foreach (string column in db.GetColumnsForTable(table))
@@ -214,14 +235,14 @@ namespace AddToComputersDB
             do
             {
                 Console.WriteLine("Select MoBo:");
-                foreach (MoBos mobo in db.MoBos)
+                foreach (MotherBoard mobo in db.MoBos)
                     Console.WriteLine(mobo.id + ". For " + mobo.ToString());
                 Console.Write("0. For all Recommendations and Exit\n>");
                 select = Convert.ToInt32(Console.ReadLine());
 
                 if (select == 0)
                 {
-                    foreach (MoBos mobo in db.MoBos)
+                    foreach (MotherBoard mobo in db.MoBos)
                     {
                         mobo.PrintRecommendations();
                         Console.WriteLine("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
@@ -242,6 +263,7 @@ namespace AddToComputersDB
             {
                 try
                 {
+                    Console.WriteLine(RTL("כדאי להשתמש בתוכנת ")+RTL("Speccy"));
                     Console.WriteLine(RTL("הסדר הנכון להוספה הוא: מחשב, מעבד, לוח אם, דיסק, זכרון"));
 
                     foreach (KeyValuePair<int, Type> table in db.MyTables)
@@ -279,7 +301,7 @@ namespace AddToComputersDB
                             Console.WriteLine("ID: " + db.Memories.Find(memory.id).id);
                             break;
                         case 4: //mMoBos
-                            MoBos mobo = new MoBos();
+                            MotherBoard mobo = new MotherBoard();
                             mobo.Create();
                             db.MoBos.Add(mobo);
                             //db.Entry(computer).State = EntityState.Added;

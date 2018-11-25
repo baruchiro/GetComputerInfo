@@ -29,7 +29,7 @@ namespace AddToComputersDB.Models
         public virtual DbSet<Processors> Processors { get; set; }
         public virtual DbSet<ProcessorSocket> ProcessorSocket { get; set; }
         public virtual DbSet<Sockets> Sockets { get; set; }
-        public virtual DbSet<MoBos> MoBos { get; set; }
+        public virtual DbSet<MotherBoard> MoBos { get; set; }
         public virtual DbSet<Bits> Bits { get; set; }
         public virtual DbSet<Computers> Computers { get; set; }
         public virtual DbSet<Disks> Disks { get; set; }

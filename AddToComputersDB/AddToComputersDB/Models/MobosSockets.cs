@@ -19,6 +19,6 @@ namespace AddToComputersDB.Models
         public int SocketID { get; set; }
     
         public virtual Sockets Sockets { get; set; }
-        public virtual MoBos MoBos { get; set; }
+        public virtual MotherBoard MoBos { get; set; }
     }
 }

@@ -40,7 +40,7 @@ namespace AddToComputersDB.Models
             computerType = Console.ReadLine()[0] == '1';
 
             Console.WriteLine("Enter MoBo ID:");
-            foreach (MoBos mobo in Program.db.MoBos)
+            foreach (MotherBoard mobo in Program.db.MoBos)
                 Console.WriteLine(mobo.id + ". For " + mobo.ToString());
             string result = Console.ReadLine();
             moboID = result == null || result.Length == 0 ? 0 : Convert.ToInt32(result);
@@ -53,7 +53,7 @@ namespace AddToComputersDB.Models
         public override string GetFullDetails(string tab)
         {
             string result = base.GetFullDetails(tab);
-            MoBos mobo = Program.db.MoBos.Find(moboID);
+            MotherBoard mobo = Program.db.MoBos.Find(moboID);
             if (mobo != null)
                 result += mobo.GetFullDetails(tab + "\t");
             return result;
@@ -88,12 +88,12 @@ namespace AddToComputersDB.Models
         {
             return
                 type.Contains(word) ||
-                manufcator.Contains(word);
+                (manufcator?.Contains(word) ?? false);
         }
 
-        public override void SetFreeToUse(bool freeToUse)
+        public override void SetFreeToUse(bool _freeToUse)
         {
-            this.freeToUse = freeToUse;
+            this.freeToUse = _freeToUse;
         }
 
         public override string ToString()
@@ -110,14 +110,14 @@ namespace AddToComputersDB.Models
             else
             {
                 Console.WriteLine("capacity: " + capacity + "\nDo you want to change it? y/n: ");
-                if (Console.ReadLine().ToLower()[0] == 'y')
+                if (Console.ReadLine()?.ToLower()[0] == 'y')
                 {
                     Console.Write("Enter Capacity (MB): ");
                     capacity = Convert.ToInt32(Console.ReadLine());
                 }
 
                 Console.WriteLine("memory type: " + Program.RTL(type) + "\nDo you want to change it? y/n: ");
-                if (Console.ReadLine().ToLower()[0] == 'y')
+                if (Console.ReadLine()?.ToLower()[0] == 'y')
                 {
                     Console.Write("Enter memory type (eg:");
                     foreach (string s in Program.db.Memories.Select(m => m.type).Distinct())
@@ -128,29 +128,29 @@ namespace AddToComputersDB.Models
                     type = Console.ReadLine();
                 }
 
-                Console.WriteLine("manufcator: " + Program.RTL(manufcator) + "\nDo you want to change it? y/n: ");
-                if (Console.ReadLine().ToLower()[0] == 'y')
+                Console.WriteLine("manufacturer: " + Program.RTL(manufcator) + "\nDo you want to change it? y/n: ");
+                if (Console.ReadLine()?.ToLower()[0] == 'y')
                 {
-                    Console.Write("Enter manufcator: ");
+                    Console.Write("Enter manufacturer: ");
                     manufcator = Console.ReadLine();
                 }
 
                 Console.WriteLine("computer type: " + (computerType ? "PC" : "Laptop") + "\nDo you want to change it? y/n: ");
-                if (Console.ReadLine().ToLower()[0] == 'y')
+                if (Console.ReadLine()?.ToLower()[0] == 'y')
                 {
                     Console.Write("Enter Computer type:\n0. For Laptop\n1. For PC\n>");
                     computerType = Console.ReadLine()[0] == '1';
                 }
 
-                Console.WriteLine("mobo: " + Program.db.MoBos.Find(moboID).ToString() + "\nDo you want to change it? y/n: ");
+                Console.WriteLine("mobo: " + Program.db.MoBos.Find(moboID) + "\nDo you want to change it? y/n: ");
                 if (Console.ReadLine().ToLower()[0] == 'y')
                 {
                     Console.WriteLine("Enter MoBo ID:");
-                    foreach (MoBos mobo in Program.db.MoBos)
+                    foreach (MotherBoard mobo in Program.db.MoBos)
                         Console.WriteLine(mobo.id + ". For " + mobo.ToString());
 
                     string result = Console.ReadLine();
-                    moboID = result == null || result.Length == 0 ? 0 : Convert.ToInt32(result);
+                    moboID = string.IsNullOrEmpty(result) ? 0 : Convert.ToInt32(result);
                 }
 
                 Console.WriteLine("Free to use: " + freeToUse.Value + "\nDo you want to change it? y/n: ");
@@ -163,13 +163,12 @@ namespace AddToComputersDB.Models
         }
     }
 
-    public partial class MoBos : IMyEntity
+    public partial class MotherBoard : IMyEntity
     {
         public override string GetComponentType()
         {
             return "MoBo";
         }
-        private ComponentsDBEntities db;
         public override void Create()
         {
             id = Program.db.GetNewID();
@@ -701,7 +700,7 @@ namespace AddToComputersDB.Models
         {
             string result = base.GetFullDetails(tab);
 
-            foreach (MoBos mobo in Program.db.MoBos.Where(m => m.computerID == id))
+            foreach (MotherBoard mobo in Program.db.MoBos.Where(m => m.computerID == id))
                 result += "\t" + tab + "MoBo:" + mobo.GetFullDetails(tab + "\t") + "\n";
             return result;
         }
@@ -783,8 +782,8 @@ namespace AddToComputersDB.Models
             if (Console.ReadLine().ToLower()[0] == 'y')
             {
                 bool result = true;
-                List<MoBos> mobo = MoBos.ToList();
-                foreach (MoBos m in mobo)
+                List<MotherBoard> mobo = MoBos.ToList();
+                foreach (MotherBoard m in mobo)
                     result = result && m.KillMeAndMyChildrens();
                 Program.db.Entry(this).State = EntityState.Deleted;
                 return result;
@@ -845,7 +844,7 @@ namespace AddToComputersDB.Models
             osVersion = Console.ReadLine();
 
             Console.WriteLine("Enter MoBo ID:");
-            foreach (MoBos mobo in Program.db.MoBos)
+            foreach (MotherBoard mobo in Program.db.MoBos)
                 Console.WriteLine(mobo.id + ". For " + mobo.ToString());
             result = Console.ReadLine();
             moboID = result == null || result.Length == 0 ? 0 : Convert.ToInt32(result);
@@ -856,7 +855,7 @@ namespace AddToComputersDB.Models
 
         public override string GetFullDetails(string tab)
         {
-            MoBos m = Program.db.MoBos.Find(moboID);
+            MotherBoard m = Program.db.MoBos.Find(moboID);
             string result = base.GetFullDetails(tab);
             /*if (moboID != null)
             {
@@ -921,14 +920,14 @@ namespace AddToComputersDB.Models
 
         public override bool Search(string word)
         {
+            int result=0;
             return
                 name.Contains(word) ||
                 comments.Contains(word) ||
                 status.Contains(word) ||
-                (Program.db.OSs.Find(osID) == null ?
-                false :
-                Program.db.OSs.Find(osID).name.Contains(word)) ||
-                (osVersion == null ? false : osVersion.Contains(word));
+                (Program.db.OSs.Find(osID) != null && Program.db.OSs.Find(osID).name.Contains(word)) ||
+                (osVersion?.Contains(word) ?? false)||
+                int.TryParse(word, out result)? capacity==result:false;
         }
 
         public override void SetFreeToUse(bool freeToUse)
@@ -1028,11 +1027,12 @@ namespace AddToComputersDB.Models
                     osVersion = Console.ReadLine();
                 }
 
-                Console.WriteLine("MoBo: " + Program.db.MoBos.Find(moboID).ToString() + "\nDo you want to change it? y/n: ");
+                MotherBoard mymobo = Program.db.MoBos.Find(moboID);
+                Console.WriteLine("MoBo: " + (mymobo == null ? "Not Exist" : mymobo.ToString()) + "\nDo you want to change it? y/n: ");
                 if (Console.ReadLine().ToLower()[0] == 'y')
                 {
                     Console.WriteLine("Enter MoBo ID:");
-                    foreach (MoBos mobo in Program.db.MoBos)
+                    foreach (MotherBoard mobo in Program.db.MoBos)
                         Console.WriteLine(mobo.id + ". For " + mobo.ToString());
                     string result = Console.ReadLine();
                     moboID = result == null || result.Length == 0 ? 0 : Convert.ToInt32(result);
@@ -1112,7 +1112,7 @@ namespace AddToComputersDB.Models
         public override string GetFullDetails(string tab)
         {
             string result = base.GetFullDetails(tab);
-            foreach (MoBos mobo in Program.db.MoBos.Where(m => m.proessorID == id))
+            foreach (MotherBoard mobo in Program.db.MoBos.Where(m => m.proessorID == id))
                 result += mobo.GetFullDetails(tab + "\t");
             return result;
         }
@@ -1318,7 +1318,7 @@ namespace AddToComputersDB.Models
                     { 1, typeof(Computers) },
                     {2, typeof(Disks) },
                     {3,  typeof(Memories) },
-                    {4, typeof(MoBos)},
+                    {4, typeof(MotherBoard)},
                     {5, typeof(Processors) },
                     {6, typeof(Components) },
                 };
@@ -1434,7 +1434,7 @@ namespace AddToComputersDB.Models
         }
         public virtual bool CanGiveRecommendations()
         {
-            if (this is MoBos)
+            if (this is MotherBoard)
                 return true;
             return false;
         }

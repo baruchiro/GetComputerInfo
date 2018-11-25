@@ -17,7 +17,7 @@ namespace AddToComputersDB.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Computers()
         {
-            this.MoBos = new HashSet<MoBos>();
+            this.MoBos = new HashSet<MotherBoard>();
         }
     
         public int id { get; set; }
@@ -27,6 +27,6 @@ namespace AddToComputersDB.Models
         public string model { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MoBos> MoBos { get; set; }
+        public virtual ICollection<MotherBoard> MoBos { get; set; }
     }
 }
